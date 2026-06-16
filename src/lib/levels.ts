@@ -145,9 +145,9 @@ export const LEVELS: Level[] = [
     subtitle: "一样的数不同写法",
     difficulty: 3,
     tasks: [
-      { kind: "numberline", fractions: [frac(2, 4), frac(1, 2)], rangeMax: 1, concept: "equivalent", voice: "二分之四其实就是二分之一，它们会叠在一起。", prompt: "把 2/4 和 1/2 拖到数轴上，看看它们叠在一起了吗？" },
-      { kind: "numberline", fractions: [frac(3, 6), frac(4, 8)], rangeMax: 1, concept: "equivalent", voice: "它们都等于二分之一。", prompt: "把 3/6 和 4/8 拖到正确位置。" },
-      { kind: "numberline", fractions: [frac(2, 4), frac(3, 6), frac(4, 8)], rangeMax: 1, concept: "equivalent", voice: "三个分数都住在同一个家。", prompt: "把三个等值分数都拖到正确位置。" },
+      { kind: "numberline", fractions: [frac(2, 4), frac(1, 2)], rangeMax: 1, concept: "equivalent", voice: "四分之二其实就是二分之一，它们会叠在一起。", prompt: "把 2/4 和 1/2 拖到数轴上，看看它们叠在一起了吗？" },
+      { kind: "numberline", fractions: [frac(3, 6), frac(4, 8)], rangeMax: 1, concept: "equivalent", voice: "六分之三和八分之四，它们都等于二分之一。", prompt: "把 3/6 和 4/8 拖到正确位置。" },
+      { kind: "numberline", fractions: [frac(2, 4), frac(3, 6), frac(4, 8)], rangeMax: 1, concept: "equivalent", voice: "四分之二、六分之三、八分之四，三个分数都住在同一个家。", prompt: "把三个等值分数都拖到正确位置。" },
     ],
   },
   {
@@ -171,9 +171,9 @@ export const LEVELS: Level[] = [
     subtitle: "变成最简分数",
     difficulty: 1,
     tasks: [
-      { kind: "reduce", from: frac(2, 4), to: frac(1, 2), concept: "reduction", voice: "二分之四约分后是二分之一。", prompt: "把 2/4 约分，结果是多少？" },
-      { kind: "reduce", from: frac(3, 6), to: frac(1, 2), concept: "reduction", voice: "三分之六约分后也是二分之一。", prompt: "把 3/6 约分，结果是多少？" },
-      { kind: "reduce", from: frac(6, 8), to: frac(3, 4), concept: "reduction", voice: "六分之八约分后是四分之三。", prompt: "把 6/8 约分，结果是多少？" },
+      { kind: "reduce", from: frac(2, 4), to: frac(1, 2), concept: "reduction", voice: "四分之二约分后是二分之一。", prompt: "把 2/4 约分，结果是多少？" },
+      { kind: "reduce", from: frac(3, 6), to: frac(1, 2), concept: "reduction", voice: "六分之三约分后也是二分之一。", prompt: "把 3/6 约分，结果是多少？" },
+      { kind: "reduce", from: frac(6, 8), to: frac(3, 4), concept: "reduction", voice: "八分之六约分后是四分之三。", prompt: "把 6/8 约分，结果是多少？" },
     ],
   },
   {
@@ -197,9 +197,9 @@ export const LEVELS: Level[] = [
     subtitle: "等值填空",
     difficulty: 3,
     tasks: [
-      { kind: "fill-numerator", a: frac(0, 4), b: frac(1, 2), value: 2, concept: "equivalent", voice: "几分之四等于二分之一？填填看。", prompt: "?/4 = 1/2，问号填几？" },
-      { kind: "fill-numerator", a: frac(0, 6), b: frac(1, 3), value: 2, concept: "equivalent", voice: "几分之六等于三分之一？", prompt: "?/6 = 1/3，问号填几？" },
-      { kind: "fill-numerator", a: frac(0, 8), b: frac(3, 4), value: 6, concept: "equivalent", voice: "几分之八等于四分之三？", prompt: "?/8 = 3/4，问号填几？" },
+      { kind: "fill-numerator", a: frac(0, 4), b: frac(1, 2), value: 2, concept: "equivalent", voice: "四分之几等于二分之一？填填看。", prompt: "?/4 = 1/2，问号填几？" },
+      { kind: "fill-numerator", a: frac(0, 6), b: frac(1, 3), value: 2, concept: "equivalent", voice: "六分之几等于三分之一？", prompt: "?/6 = 1/3，问号填几？" },
+      { kind: "fill-numerator", a: frac(0, 8), b: frac(3, 4), value: 6, concept: "equivalent", voice: "八分之几等于四分之三？", prompt: "?/8 = 3/4，问号填几？" },
     ],
   },
   {

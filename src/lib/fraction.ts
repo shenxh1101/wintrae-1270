@@ -59,3 +59,29 @@ export function isUnitFraction(f: Fraction): boolean {
   const s = simplify(f);
   return s.num === 1;
 }
+
+const CN_DIGIT = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+
+function toCnNum(n: number): string {
+  if (n <= 10) return CN_DIGIT[n] ?? String(n);
+  if (n < 20) return "十" + CN_DIGIT[n - 10];
+  if (n < 100) {
+    const tens = Math.floor(n / 10);
+    const ones = n % 10;
+    return CN_DIGIT[tens] + "十" + (ones === 0 ? "" : CN_DIGIT[ones]);
+  }
+  return String(n);
+}
+
+export function fracToCn(f: Fraction, options?: { simplify?: boolean }): string {
+  const base = options?.simplify ? simplify(f) : f;
+  const { num, den } = base;
+  if (den === 1) return toCnNum(num);
+  return `${toCnNum(den)}分之${toCnNum(num)}`;
+}
+
+export function fracToCnQuestion(f: Omit<Fraction, "num"> & { num: number | "?" }): string {
+  const den = toCnNum(f.den);
+  const num = f.num === "?" ? "几" : toCnNum(f.num);
+  return `${den}分之${num}`;
+}

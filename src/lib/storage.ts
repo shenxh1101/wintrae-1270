@@ -58,6 +58,7 @@ export const ERROR_TYPES: ErrorType[] = [
   "comparison",
   "fill-numerator",
   "add-sub",
+  "fraction-merge",
 ];
 
 function todayISO(): string {

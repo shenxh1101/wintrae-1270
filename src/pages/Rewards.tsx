@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, BookOpen, TrendingDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { useGameStore, totalStars } from "@/lib/store";
-import { LEVELS, THEMES } from "@/lib/levels";
+import { LEVELS, THEMES, ERROR_TYPE_LABELS } from "@/lib/levels";
 import { BADGES } from "@/lib/badges";
 import { CONCEPT_LIST } from "@/lib/concepts";
+import { reviewTopErrorTypes } from "@/lib/review";
 import StarRow from "@/components/ui/StarRow";
 import StickerButton from "@/components/ui/StickerButton";
 import { useSpeak } from "@/hooks/useSpeak";
@@ -21,6 +22,8 @@ export default function Rewards() {
   const speak = useSpeak();
   const stars = totalStars(progress);
   const unlockedBadges = BADGES.filter((b) => progress.badges[b.id]?.unlocked).length;
+  const topErrors = reviewTopErrorTypes(progress.errors, 3);
+  const hasErrors = topErrors.length > 0;
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-5xl px-4 py-5 sm:px-6">
@@ -56,6 +59,42 @@ export default function Rewards() {
             <div className="text-xs text-inkSoft">已掌握知识点</div>
           </div>
         </motion.div>
+      </section>
+
+      <section className="mb-6">
+        <div className="card-paper overflow-hidden">
+          <div className="flex items-center gap-3 bg-gradient-to-r from-tomato/10 to-cheese/10 p-4">
+            <div className="grid h-12 w-12 place-items-center rounded-full bg-tomato/15 text-2xl">📝</div>
+            <div className="flex-1">
+              <h2 className="font-kid text-lg text-ink">错题小练习</h2>
+              <p className="text-xs text-inkSoft">针对常错题型练一练，把错误变进步</p>
+            </div>
+            <Link to="/rewards/review">
+              <StickerButton variant="tomato" size="sm">
+                <BookOpen size={16} /> 开始复习
+              </StickerButton>
+            </Link>
+          </div>
+          <div className="p-4">
+            {!hasErrors ? (
+              <div className="py-2 text-center text-sm text-inkSoft">
+                🎉 还没有错题记录，继续保持哦～
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {topErrors.map(({ type, label, count }) => (
+                  <div key={type} className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2">
+                      <TrendingDown size={14} className="text-tomato" />
+                      <span className="text-ink">{label}</span>
+                    </div>
+                    <span className="text-tomato">错 {count} 次</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </section>
 
       <section className="mb-6">

@@ -46,7 +46,8 @@ export type Task =
   | { kind: "reduce"; from: Fraction; to: Fraction; concept: ConceptId; voice: string; prompt: string }
   | { kind: "compare"; a: Fraction; b: Fraction; pick: "larger" | "smaller"; answer: Fraction; concept: ConceptId; voice: string; prompt: string }
   | { kind: "fill-numerator"; a: Fraction; b: Fraction; value: number; concept: ConceptId; voice: string; prompt: string }
-  | { kind: "addsub"; op: "+" | "-"; a: Fraction; b: Fraction; answer: Fraction; concept: ConceptId; voice: string; prompt: string };
+  | { kind: "addsub"; op: "+" | "-"; a: Fraction; b: Fraction; answer: Fraction; concept: ConceptId; voice: string; prompt: string }
+  | { kind: "merge"; a: Fraction; b: Fraction; answer: Fraction; distractors: Fraction[]; concept: ConceptId; voice: string; prompt: string };
 
 export interface Level {
   id: string;
@@ -215,6 +216,19 @@ export const LEVELS: Level[] = [
       { kind: "addsub", op: "-", a: frac(3, 4), b: frac(1, 4), answer: frac(1, 2), concept: "add-sub", voice: "四分之三减四分之一。", prompt: "3/4 - 1/4 = ?" },
     ],
   },
+  {
+    id: "p5",
+    theme: "puzzle",
+    order: 5,
+    title: "合并小厨房",
+    subtitle: "卡片拼一拼",
+    difficulty: 3,
+    tasks: [
+      { kind: "merge", a: frac(1, 4), b: frac(1, 4), answer: frac(1, 2), distractors: [frac(1, 3), frac(1, 2)], concept: "add-sub", voice: "把两张四分之一的卡片拖到盘子里，看看它们合起来是多少。", prompt: "把 2 张 1/4 卡片拖进合并区" },
+      { kind: "merge", a: frac(1, 3), b: frac(1, 3), answer: frac(2, 3), distractors: [frac(1, 4), frac(1, 6)], concept: "add-sub", voice: "两张三分之一合起来是三分之二。", prompt: "把 2 张 1/3 卡片拖进合并区" },
+      { kind: "merge", a: frac(1, 6), b: frac(2, 6), answer: frac(1, 2), distractors: [frac(1, 3), frac(1, 4)], concept: "add-sub", voice: "六分之一加六分之二，合起来等于二分之一。", prompt: "把 1/6 和 2/6 卡片拖进合并区" },
+    ],
+  },
 ];
 
 export function getLevel(id: string): Level | undefined {
@@ -231,7 +245,8 @@ export type ErrorType =
   | "reduction"
   | "comparison"
   | "fill-numerator"
-  | "add-sub";
+  | "add-sub"
+  | "fraction-merge";
 
 export const ERROR_TYPE_LABELS: Record<ErrorType, string> = {
   "equal-division": "等分识别",
@@ -240,6 +255,7 @@ export const ERROR_TYPE_LABELS: Record<ErrorType, string> = {
   comparison: "比较大小",
   "fill-numerator": "补全分子",
   "add-sub": "分数加减",
+  "fraction-merge": "卡片合并",
 };
 
 export function taskErrorType(task: Task): ErrorType {
@@ -256,5 +272,7 @@ export function taskErrorType(task: Task): ErrorType {
       return "fill-numerator";
     case "addsub":
       return "add-sub";
+    case "merge":
+      return "fraction-merge";
   }
 }

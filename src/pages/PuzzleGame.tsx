@@ -8,6 +8,7 @@ import ReduceGame from "@/components/puzzle/ReduceGame";
 import CompareGame from "@/components/puzzle/CompareGame";
 import FillNumeratorGame from "@/components/puzzle/FillNumeratorGame";
 import AddSubGame from "@/components/puzzle/AddSubGame";
+import MergeGame from "@/components/puzzle/MergeGame";
 import { useGameFlow } from "@/hooks/useGameFlow";
 import { useSpeak } from "@/hooks/useSpeak";
 import { useGameStore } from "@/lib/store";
@@ -107,6 +108,9 @@ export default function PuzzleGame() {
         )}
         {task?.kind === "addsub" && (
           <AddSubGame key={subKey} task={task} locked={locked} onAnswer={handleAnswer} />
+        )}
+        {task?.kind === "merge" && (
+          <MergeGame key={subKey} task={task} locked={locked} onAnswer={handleAnswer} />
         )}
       </div>
 
